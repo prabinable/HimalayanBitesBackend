@@ -7,12 +7,11 @@ import np.prabinsoft.Food.Delivery.io.FoodRequest;
 import np.prabinsoft.Food.Delivery.io.FoodResponse;
 import np.prabinsoft.Food.Delivery.service.FoodService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/food")
@@ -29,10 +28,25 @@ public class FoodController {
             request = objectMapper.readValue(foodString, FoodRequest.class);
         } catch (JsonProcessingException e) {
 //            return ResponseEntity.badRequest().build();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Invalid Json format");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Json format");
         }
         FoodResponse foodResponse = foodService.addFood(request, file);
         return foodResponse;
     }
 
+    @GetMapping
+    public List<FoodResponse> getAllFood() {
+        return foodService.getAllFood();
+    }
+
+    @GetMapping("/{id}")
+    public FoodResponse getFoodById(@PathVariable String id) {
+        return foodService.getFood(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFoodById(@PathVariable String id) {
+        foodService.deleteFood(id);
+    }
 }

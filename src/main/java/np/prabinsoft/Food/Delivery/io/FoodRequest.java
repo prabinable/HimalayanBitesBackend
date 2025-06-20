@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "food")
+
 public class FoodRequest {
     private String name;
     private String description;

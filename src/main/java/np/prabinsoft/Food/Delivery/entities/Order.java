@@ -18,11 +18,13 @@ public class Order {
     private String userAddress;
     private String phoneNumber;
     private String email;
+
     private List<OrderItem> orderItemList;
     private double amount;
+
     private String paymentStatus;
     private String razorpayOrderId;
-
     private String razorpaySignature;
+
     private String orderStatus;
 }

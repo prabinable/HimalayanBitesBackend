@@ -16,3 +16,5 @@ public class OrderItem {
     private String description;
     private String name;
 }
+
+// we created order item separately as a user can order multiple items that's why
